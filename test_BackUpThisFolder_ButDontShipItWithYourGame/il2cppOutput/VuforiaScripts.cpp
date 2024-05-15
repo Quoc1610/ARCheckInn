@@ -480,7 +480,6 @@ IL2CPP_EXTERN_C const RuntimeMethod* Component_GetComponentsInChildren_TisVufori
 IL2CPP_EXTERN_C const RuntimeMethod* DefaultInitializationErrorHandler_DrawWindowContent_m7FBCC5118BEC5313326D294AC6AA46A1639C3146_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* DefaultInitializationErrorHandler_OnVuforiaInitializationError_m44CB7BCB92F63635456C77D3DDD528624828C12A_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* DefaultObserverEventHandler_OnObserverDestroyed_mDE68FFC02B9F473767AF430F805CFA3344CDA069_RuntimeMethod_var;
-IL2CPP_EXTERN_C const RuntimeMethod* DefaultObserverEventHandler_OnObserverStatusChanged_mD8AD03B09A4086213FA8C13DEBC1365CA405C991_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* DefaultObserverEventHandler_OnStateUpdated_m0799412534A7F11921789B5721B3058D76AEDB7E_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* GameObject_AddComponent_TisCamera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184_m0933BC50E883CDEF6FA83FE190DA37CCB2802142_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* GameObject_GetComponent_TisCollider_t1CC3163924FCD6C4CC2E816373A929C1E3D55E76_m4CB0FC4E59CE6C91F1106739EF364208A63E2597_RuntimeMethod_var;
@@ -3099,8 +3098,6 @@ inline void Action_1__ctor_mAED3D7A3A6B9F43B16ABFA99FE34D75D6371762E (Action_1_t
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObserverBehaviour_add_OnBehaviourDestroyed_mEE1C42793C746AC4A03279F411BAB79B864DB4CE (ObserverBehaviour_t5523404662BA53BE6118C49F6FFA9E19719115DB* __this, Action_1_t49AD19663F9D6070EBF5FD37F8BEA43810805799* ___0_value, const RuntimeMethod* method) ;
 // Vuforia.TargetStatus Vuforia.ObserverBehaviour::get_TargetStatus()
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR TargetStatus_t5D866F1CAA9D70E5B66D532E69B190EA3BAAC4B0 ObserverBehaviour_get_TargetStatus_m11A222E650B40FB61D9FD4BD2689F04900086E5F_inline (ObserverBehaviour_t5523404662BA53BE6118C49F6FFA9E19719115DB* __this, const RuntimeMethod* method) ;
-// System.Void DefaultObserverEventHandler::OnObserverStatusChanged(Vuforia.ObserverBehaviour,Vuforia.TargetStatus)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DefaultObserverEventHandler_OnObserverStatusChanged_mD8AD03B09A4086213FA8C13DEBC1365CA405C991 (DefaultObserverEventHandler_t7CF27A0CC5B1FAEDDB5964C3A11F29C2A14E1FC0* __this, ObserverBehaviour_t5523404662BA53BE6118C49F6FFA9E19719115DB* ___0_behaviour, TargetStatus_t5D866F1CAA9D70E5B66D532E69B190EA3BAAC4B0 ___1_targetStatus, const RuntimeMethod* method) ;
 // System.Void DefaultObserverEventHandler::SetupPoseSmoothing()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DefaultObserverEventHandler_SetupPoseSmoothing_m8211BC8AD1EC534469702AD553AC733921D2C9CC (DefaultObserverEventHandler_t7CF27A0CC5B1FAEDDB5964C3A11F29C2A14E1FC0* __this, const RuntimeMethod* method) ;
 // Vuforia.VuforiaBehaviour Vuforia.VuforiaBehaviour::get_Instance()
@@ -5555,7 +5552,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DefaultObserverEventHandler_Start_m4C0CD
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Action_2_tAC0AA9B652075EE1CE661500AC3373C7008D598F_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Component_GetComponent_TisObserverBehaviour_t5523404662BA53BE6118C49F6FFA9E19719115DB_mDC639300BE47642C9C8B6B9B1037E43085704742_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&DefaultObserverEventHandler_OnObserverDestroyed_mDE68FFC02B9F473767AF430F805CFA3344CDA069_RuntimeMethod_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&DefaultObserverEventHandler_OnObserverStatusChanged_mD8AD03B09A4086213FA8C13DEBC1365CA405C991_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
@@ -5575,7 +5571,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DefaultObserverEventHandler_Start_m4C0CD
 		bool L_3 = V_0;
 		if (!L_3)
 		{
-			goto IL_006d;
+			goto IL_006e;
 		}
 	}
 	{
@@ -5583,7 +5579,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DefaultObserverEventHandler_Start_m4C0CD
 		ObserverBehaviour_t5523404662BA53BE6118C49F6FFA9E19719115DB* L_4 = __this->___mObserverBehaviour_9;
 		Action_2_tAC0AA9B652075EE1CE661500AC3373C7008D598F* L_5 = (Action_2_tAC0AA9B652075EE1CE661500AC3373C7008D598F*)il2cpp_codegen_object_new(Action_2_tAC0AA9B652075EE1CE661500AC3373C7008D598F_il2cpp_TypeInfo_var);
 		NullCheck(L_5);
-		Action_2__ctor_mCE1D840FD103AC1247B1231CAB0A34B795A2978C(L_5, __this, (intptr_t)((void*)DefaultObserverEventHandler_OnObserverStatusChanged_mD8AD03B09A4086213FA8C13DEBC1365CA405C991_RuntimeMethod_var), NULL);
+		Action_2__ctor_mCE1D840FD103AC1247B1231CAB0A34B795A2978C(L_5, __this, (intptr_t)((void*)GetVirtualMethodInfo(__this, 6)), NULL);
 		NullCheck(L_4);
 		ObserverBehaviour_add_OnTargetStatusChanged_m3EEEEDBF95D9B118056440AACBC08A516975FA6F(L_4, L_5, NULL);
 		// mObserverBehaviour.OnBehaviourDestroyed += OnObserverDestroyed;
@@ -5599,12 +5595,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DefaultObserverEventHandler_Start_m4C0CD
 		NullCheck(L_9);
 		TargetStatus_t5D866F1CAA9D70E5B66D532E69B190EA3BAAC4B0 L_10;
 		L_10 = ObserverBehaviour_get_TargetStatus_m11A222E650B40FB61D9FD4BD2689F04900086E5F_inline(L_9, NULL);
-		DefaultObserverEventHandler_OnObserverStatusChanged_mD8AD03B09A4086213FA8C13DEBC1365CA405C991(__this, L_8, L_10, NULL);
+		VirtualActionInvoker2< ObserverBehaviour_t5523404662BA53BE6118C49F6FFA9E19719115DB*, TargetStatus_t5D866F1CAA9D70E5B66D532E69B190EA3BAAC4B0 >::Invoke(6 /* System.Void DefaultObserverEventHandler::OnObserverStatusChanged(Vuforia.ObserverBehaviour,Vuforia.TargetStatus) */, __this, L_8, L_10);
 		// SetupPoseSmoothing();
 		DefaultObserverEventHandler_SetupPoseSmoothing_m8211BC8AD1EC534469702AD553AC733921D2C9CC(__this, NULL);
 	}
 
-IL_006d:
+IL_006e:
 	{
 		// }
 		return;
@@ -5710,7 +5706,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DefaultObserverEventHandler_OnObserverDe
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Action_1_t49AD19663F9D6070EBF5FD37F8BEA43810805799_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Action_2_tAC0AA9B652075EE1CE661500AC3373C7008D598F_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&DefaultObserverEventHandler_OnObserverDestroyed_mDE68FFC02B9F473767AF430F805CFA3344CDA069_RuntimeMethod_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&DefaultObserverEventHandler_OnObserverStatusChanged_mD8AD03B09A4086213FA8C13DEBC1365CA405C991_RuntimeMethod_var);
 		s_Il2CppMethodInitialized = true;
 	}
 	{
@@ -5718,7 +5713,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DefaultObserverEventHandler_OnObserverDe
 		ObserverBehaviour_t5523404662BA53BE6118C49F6FFA9E19719115DB* L_0 = __this->___mObserverBehaviour_9;
 		Action_2_tAC0AA9B652075EE1CE661500AC3373C7008D598F* L_1 = (Action_2_tAC0AA9B652075EE1CE661500AC3373C7008D598F*)il2cpp_codegen_object_new(Action_2_tAC0AA9B652075EE1CE661500AC3373C7008D598F_il2cpp_TypeInfo_var);
 		NullCheck(L_1);
-		Action_2__ctor_mCE1D840FD103AC1247B1231CAB0A34B795A2978C(L_1, __this, (intptr_t)((void*)DefaultObserverEventHandler_OnObserverStatusChanged_mD8AD03B09A4086213FA8C13DEBC1365CA405C991_RuntimeMethod_var), NULL);
+		Action_2__ctor_mCE1D840FD103AC1247B1231CAB0A34B795A2978C(L_1, __this, (intptr_t)((void*)GetVirtualMethodInfo(__this, 6)), NULL);
 		NullCheck(L_0);
 		ObserverBehaviour_remove_OnTargetStatusChanged_m6B5ABC6137D8E98EA690366D721D44C76C1FA08C(L_0, L_1, NULL);
 		// mObserverBehaviour.OnBehaviourDestroyed -= OnObserverDestroyed;
@@ -5867,11 +5862,11 @@ IL_0051:
 		L_22 = TargetStatus_get_Status_m6CA973C4D857DCA6B775DF7E053B0990A83026A3_inline(L_21, NULL);
 		int32_t L_23;
 		L_23 = TargetStatus_get_Status_m6CA973C4D857DCA6B775DF7E053B0990A83026A3_inline((&___1_targetStatus), NULL);
-		VirtualActionInvoker2< int32_t, int32_t >::Invoke(6 /* System.Void DefaultObserverEventHandler::HandleTargetStatusChanged(Vuforia.Status,Vuforia.Status) */, __this, L_22, L_23);
+		VirtualActionInvoker2< int32_t, int32_t >::Invoke(7 /* System.Void DefaultObserverEventHandler::HandleTargetStatusChanged(Vuforia.Status,Vuforia.Status) */, __this, L_22, L_23);
 		// HandleTargetStatusInfoChanged(targetStatus.StatusInfo);
 		int32_t L_24;
 		L_24 = TargetStatus_get_StatusInfo_mA52A044649A96018BDC52555018BB9412877B0E6_inline((&___1_targetStatus), NULL);
-		VirtualActionInvoker1< int32_t >::Invoke(7 /* System.Void DefaultObserverEventHandler::HandleTargetStatusInfoChanged(Vuforia.StatusInfo) */, __this, L_24);
+		VirtualActionInvoker1< int32_t >::Invoke(8 /* System.Void DefaultObserverEventHandler::HandleTargetStatusInfoChanged(Vuforia.StatusInfo) */, __this, L_24);
 		// mPreviousTargetStatus = targetStatus;
 		TargetStatus_t5D866F1CAA9D70E5B66D532E69B190EA3BAAC4B0 L_25 = ___1_targetStatus;
 		__this->___mPreviousTargetStatus_10 = L_25;
@@ -5921,14 +5916,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DefaultObserverEventHandler_HandleTarget
 	}
 	{
 		// OnTrackingFound();
-		VirtualActionInvoker0::Invoke(8 /* System.Void DefaultObserverEventHandler::OnTrackingFound() */, __this);
+		VirtualActionInvoker0::Invoke(9 /* System.Void DefaultObserverEventHandler::OnTrackingFound() */, __this);
 		goto IL_0036;
 	}
 
 IL_002d:
 	{
 		// OnTrackingLost();
-		VirtualActionInvoker0::Invoke(9 /* System.Void DefaultObserverEventHandler::OnTrackingLost() */, __this);
+		VirtualActionInvoker0::Invoke(10 /* System.Void DefaultObserverEventHandler::OnTrackingLost() */, __this);
 	}
 
 IL_0036:
@@ -5967,7 +5962,7 @@ IL_0049:
 	}
 	{
 		// OnTrackingLost();
-		VirtualActionInvoker0::Invoke(9 /* System.Void DefaultObserverEventHandler::OnTrackingLost() */, __this);
+		VirtualActionInvoker0::Invoke(10 /* System.Void DefaultObserverEventHandler::OnTrackingLost() */, __this);
 	}
 
 IL_0058:

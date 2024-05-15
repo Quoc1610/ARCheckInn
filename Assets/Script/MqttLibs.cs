@@ -28,8 +28,7 @@ public class MqttLibs : M2MqttUnityClient
 
     public void TestPublish()
     {
-        //client.Publish("M2MQTT_Unity/test", System.Text.Encoding.UTF8.GetBytes("Test message"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
-        client.Publish("quocnguyentran/feeds/ai", System.Text.Encoding.UTF8.GetBytes("Hello may cung"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+        client.Publish("/innovation/valvecontroller/eHealthAR", System.Text.Encoding.UTF8.GetBytes("Hello may cung"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
 
         Debug.Log("Test message published");
         AddUiMessage("Test message published.");
@@ -94,12 +93,17 @@ public class MqttLibs : M2MqttUnityClient
 
     protected override void SubscribeTopics()
     {
-        client.Subscribe(new string[] { "quocnguyentran/feeds/Hello" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+        Debug.Log("Subcribed");
+        client.Subscribe(new string[] { "/innovation/valvecontroller/eHealthAR" }, 
+            new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+        
+        
     }
 
     protected override void UnsubscribeTopics()
     {
-        client.Unsubscribe(new string[] { "M2MQTT_Unity/test" });
+        client.Unsubscribe(new string[] { "innovation/valvecontroller/eHealthAR" });
+        
     }
 
     protected override void OnConnectionFailed(string errorMessage)
@@ -179,14 +183,6 @@ public class MqttLibs : M2MqttUnityClient
         Debug.Log("***Received: " + msg);
         objText.SetText(msg);
         StoreMessage(msg);
-        if (topic == "M2MQTT_Unity/test")
-        {
-            if (autoTest)
-            {
-                autoTest = false;
-                Disconnect();
-            }
-        }
     }
 
     private void StoreMessage(string eventMsg)
@@ -202,7 +198,7 @@ public class MqttLibs : M2MqttUnityClient
     protected override void Update()
     {
         base.Update(); // call ProcessMqttEvents()
-
+        
         if (eventMessages.Count > 0)
         {
             foreach (string msg in eventMessages)
