@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TestAnim : MonoBehaviour
 {
+   
     public Animator animator;
     public Button helloButton;
     public Button canButton;
@@ -16,6 +17,10 @@ public class TestAnim : MonoBehaviour
         
     }
 
+    public void TriggerAnim(string trigger)
+    {
+        animator.SetTrigger(trigger);
+    }
     // Update is called once per frame
     void Update()
     {
