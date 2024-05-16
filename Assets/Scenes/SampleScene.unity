@@ -674,7 +674,7 @@ PrefabInstance:
     - target: {fileID: 1877375030784964665, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 74abee1554a3b784cadd52ee96d7d82d, type: 2}
+      objectReference: {fileID: 9100000, guid: 1adedd153d95b48439b5454f27f21280, type: 2}
     - target: {fileID: 1877375030794472443, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_Name
       value: Nurse
@@ -1161,7 +1161,6 @@ GameObject:
   - component: {fileID: 1020249456}
   - component: {fileID: 1020249457}
   - component: {fileID: 1020249458}
-  - component: {fileID: 1020249459}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1232,10 +1231,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1983304435}
-  helloButton: {fileID: 1199636429}
-  canButton: {fileID: 0}
-  thankButton: {fileID: 0}
-  bangDienButton: {fileID: 0}
 --- !u!114 &1020249456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,13 +1244,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goNurse: {fileID: 549033564}
-  observerEventHandler: {fileID: 1020249459}
-  mqttLibs: {fileID: 1020249457}
   animatorController: {fileID: 1020249455}
   soundManager: {fileID: 1020249458}
-  countFirstTrack: 0
-  interval: 0.1
-  status_fsm: 0
+  mqttLibs: {fileID: 1020249457}
+  currentState: 1
+  timeSinceStartup: 0
+  timerInterval: 0.1
+  btnChange:
+  - {fileID: 1199636429}
+  - {fileID: 1160812712}
+  - {fileID: 2031621786}
+  - {fileID: 1276589769}
 --- !u!114 &1020249457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1300,57 +1299,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1602532492}
   audioClips:
-  - {fileID: 8300000, guid: 59582658236316c478e8221bb9fec095, type: 3}
-  - {fileID: 8300000, guid: b13ff492467c7b643be6d36b55c68658, type: 3}
-  - {fileID: 8300000, guid: ca5fd7ad9d6149e4b8ea8ceb90c8a3eb, type: 3}
-  button:
-  - {fileID: 1199636429}
-  - {fileID: 1160812712}
-  - {fileID: 2031621786}
---- !u!114 &1020249459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020249451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a146459be2ffc5842b96e888bb194739, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StatusFilter: 2
-  UsePoseSmoothing: 0
-  AnimationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 3.3333333
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
-      value: 1
-      inSlope: 3.3333333
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  OnTargetFound:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTargetLost:
-    m_PersistentCalls:
-      m_Calls: []
+  - {fileID: 8300000, guid: c75dc6bfb59cc644eb9aa0cfb72b969e, type: 3}
+  - {fileID: 8300000, guid: 5f57897988d9bae4ca801c72de3bdb01, type: 3}
+  - {fileID: 8300000, guid: 9e80d949017d0dc46b61da05982759c8, type: 3}
+  - {fileID: 8300000, guid: 64941eeaa79be1d48ac47af75f2bcaed, type: 3}
+  button: []
 --- !u!1 &1160812710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,26 +1388,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1020249455}
-        m_TargetAssemblyTypeName: TestAnim, Assembly-CSharp
-        m_MethodName: OnCan_Clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1020249458}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: OnSound_Click
+      - m_Target: {fileID: 1020249456}
+        m_TargetAssemblyTypeName: KichBan, Assembly-CSharp
+        m_MethodName: On_ChangeStateClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1560,26 +1501,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1020249455}
-        m_TargetAssemblyTypeName: TestAnim, Assembly-CSharp
-        m_MethodName: OnHello_Clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1020249458}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: OnSound_Click
+      - m_Target: {fileID: 1020249456}
+        m_TargetAssemblyTypeName: KichBan, Assembly-CSharp
+        m_MethodName: On_ChangeStateClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1862,14 +1791,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1020249457}
-        m_TargetAssemblyTypeName: MqttLibs, Assembly-CSharp
-        m_MethodName: TestPublish
-        m_Mode: 1
+      - m_Target: {fileID: 1020249456}
+        m_TargetAssemblyTypeName: KichBan, Assembly-CSharp
+        m_MethodName: On_ChangeStateClick
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2279,21 +2208,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1020249455}
-        m_TargetAssemblyTypeName: TestAnim, Assembly-CSharp
-        m_MethodName: OnThank_Clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1020249458}
-        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
-        m_MethodName: OnSound_Click
+      - m_Target: {fileID: 1020249456}
+        m_TargetAssemblyTypeName: KichBan, Assembly-CSharp
+        m_MethodName: On_ChangeStateClick
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
