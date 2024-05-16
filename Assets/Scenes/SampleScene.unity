@@ -1515,6 +1515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goNurse: {fileID: 549033564}
+  DefaultObserverEventHandler: {fileID: 336175365}
+  firstStart: 0
   animatorController: {fileID: 1020249455}
   soundManager: {fileID: 1020249458}
   mqttLibs: {fileID: 1020249457}
