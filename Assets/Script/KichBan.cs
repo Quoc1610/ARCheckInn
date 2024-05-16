@@ -1,135 +1,178 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Vuforia;
 
 public class KichBan : MonoBehaviour
 {
     public GameObject goNurse;
-    public CustomObserverEventHandler observerEventHandler;
-    public MqttLibs mqttLibs;
+    
+    public enum AnimationState { XinChao, Idle, DoChieuCao, DoCanNang, DoNhietDo, DoSPO2, DoNhipTim, DoHuyetAp }
+
     public AnimatorController animatorController;
     public SoundManager soundManager;
-    public int countFirstTrack;
-    public float interval = .1f;
-    private float nextUpdateTime;
-    public enum animationState {idle, greeting, weight_manual, height_manual};
-    public const int idle = 0;
-    public const int greeting = 1;
-    public const int weight_manual = 2;
-    public const int height_manual = 3;
-    public int status_fsm = idle;
-    int[] timer_counter = new int[10];
-    int[] timer_flag = new int[10];
+    public MqttLibs mqttLibs;
+    public AnimationState currentState;
+    public float timeSinceStartup;
+    public float timerInterval = 0.1f;
+    // private bool isFirstScan = true;
 
-    private void Start()
+    public void Start()
     {
-        countFirstTrack = 0;
+        // animator = GetComponent<Animator>(); // Assuming Animator is on this GameObject
+        currentState = AnimationState.Idle;
     }
-    
-    private void Update()
+
+    public void Update()
     {
-        if (Time.realtimeSinceStartup >= nextUpdateTime)
+        timeSinceStartup += Time.deltaTime;
+
+        if (timeSinceStartup >= timerInterval)
         {
-            //Debug.Log("1s");
             timerRun();
-            fsm_action();
-            nextUpdateTime += interval;
-        }
-        if (goNurse.gameObject.activeSelf)
-        {
-            if (countFirstTrack == 0)
-            {
-                setTimer(0,1);
-                status_fsm = greeting;
-                countFirstTrack++;
-            }
+            fsmAction();
+            timeSinceStartup -= timerInterval;
         }
 
-        if (mqttLibs.objText.text == "can")
-        {
-            setTimer(0, 1);
-            Debug.Log("can");
-            status_fsm = weight_manual;
-        }
-        else if (mqttLibs.objText.text == "do")
-        {
-            setTimer(0, 1);
-            Debug.Log("do");
-            status_fsm = height_manual;
+        // if (goNurse.activeSelf)
+        // {
+        //     if (isFirstScan)
+        //     {
+        //         StartXinChao();
+        //         isFirstScan = false;
+        //     }
+        // }
 
+        if (currentState == AnimationState.Idle && mqttLibs.objText.text != "")
+        {
+            HandleMqttMessage(mqttLibs.objText.text);
         }
     }
 
-    void setTimer(int index, int count)
+    public void HandleMqttMessage(string message)
     {
-        timer_counter[index] = count;
-        timer_flag[index] = 0;
-    }
-
-    void timerRun()
-    {
-        for (int i = 0; i < 10; i++)
+        switch (message.ToLower())
         {
-            if (timer_counter[i] > 0)
-            {
-                timer_counter[i]--;
-
-                if (timer_counter[i] == 0)
-                {
-                    timer_flag[i] = 1;
-                }
-            }
-        }
-    }
-
-    void fsm_action()
-    {
-        switch (status_fsm)
-        {
-            case idle:
-                
+            case "connguoi":
+                StartXinChao();
                 break;
-            case greeting:
-                if (timer_flag[0] == 1)
-                {
-                    setTimer(0, 1);
-
-                    //TODO FOR GREETING
-                    Debug.Log("GREETING");
-                    animatorController.TriggerAnim("Hello");
-                    soundManager.PlaySound(1);
-
-                    status_fsm = weight_manual;
-                }
-
+            case "cao":
+                StartDoChieuCao();
                 break;
-            case weight_manual:
-                if (timer_flag[0] == 1)
-                {
-                    setTimer(0, 1);
-                    //TODO FOR WEIGHT MANUAL
-                    Debug.Log("Weight");
-                    animatorController.TriggerAnim("Can");
-                    soundManager.PlaySound(2);
-                }
-
+            case "can":
+                StartDoCanNang();
                 break;
-            case height_manual:
-                if (timer_flag[0] == 1)
-                {
-                    setTimer(0, 1);
-                    Debug.Log("Height");
-                    animatorController.TriggerAnim("DoChieuCao");
-                    soundManager.PlaySound(2);
-                }
-
+            case "nhietdo":
+                StartDoNhietDo();
+                break;
+            case "spo2":
+                StartDoSPO2();
+                break;
+            case "nhiptim":
+                StartDoNhipTim();
+                break;
+            case "ecg":
+                StartDoHuyetAp();
                 break;
             default:
+                // Handle unexpected messages (optional)
                 break;
         }
     }
-    
-}
 
-   
+    private void StartXinChao()
+    {
+        currentState = AnimationState.XinChao;
+        SetTimer(1);
+    }
+
+    private void StartDoChieuCao()
+    {
+        currentState = AnimationState.DoChieuCao;
+        SetTimer(1);
+    }
+
+    private void StartDoCanNang()
+    {
+        currentState = AnimationState.DoCanNang;
+        SetTimer(1);
+    }
+
+    private void StartDoNhietDo()
+    {
+        currentState = AnimationState.DoNhietDo;
+        SetTimer(1);
+    }
+
+    private void StartDoSPO2()
+    {
+        currentState = AnimationState.DoSPO2;
+        SetTimer(1);
+    }
+
+    private void StartDoNhipTim()
+    {
+        currentState = AnimationState.DoNhipTim;
+        SetTimer(1);
+    }
+
+    private void StartDoHuyetAp()
+    {
+        currentState = AnimationState.DoHuyetAp;
+        SetTimer(1);
+    }
+
+    private void SetTimer(int duration)
+    {
+        timerInterval = duration * 0.1f; // Convert seconds to timer ticks
+    }
+
+    private void timerRun()
+    {
+        if (timerInterval > 0)
+        {
+            timerInterval -= Time.deltaTime;
+            if (timerInterval <= 0)
+            {
+                currentState = AnimationState.Idle;
+                timerInterval = 0.1f; // Reset default timer interval
+            }
+        }
+    }
+
+    private void fsmAction()
+    {
+        switch (currentState)
+        {
+            case AnimationState.XinChao:
+                animatorController.TriggerAnim("XinChao"); // Assuming trigger name is "XinChao"
+                soundManager.PlaySound(1);
+                break;
+            case AnimationState.DoChieuCao:
+                animatorController.TriggerAnim("DoChieuCao"); // Assuming trigger name is "DoChieuCao"
+                soundManager.PlaySound(2);
+                break;
+            case AnimationState.DoCanNang:
+                animatorController.TriggerAnim("DoCanNang"); // Assuming trigger name is "DoCanNang"
+                soundManager.PlaySound(2);
+                break;
+            case AnimationState.DoNhietDo:
+                animatorController.TriggerAnim("DoNhietDo"); // Assuming trigger name is "DoNhietDo"
+                soundManager.PlaySound(2);
+                break;
+            case AnimationState.DoSPO2:
+                animatorController.TriggerAnim("DoSPO2"); // Assuming trigger name is "DoSPO2"
+                soundManager.PlaySound(2);
+                break;
+            case AnimationState.DoNhipTim:
+                animatorController.TriggerAnim("DoNhipTim"); // Assuming trigger name is "DoNhipTim"
+                soundManager.PlaySound(2);
+                break;
+            case AnimationState.DoHuyetAp:
+                animatorController.TriggerAnim("DoHuyetAp"); // Assuming trigger name is "DoHuyetAp"
+                soundManager.PlaySound(2);
+                break;
+        }
+    }
+}
