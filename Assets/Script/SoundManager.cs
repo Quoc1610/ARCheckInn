@@ -9,14 +9,28 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip[] audioClips;
     public Button[] button;
-    public void OnSound_Click(int index){
+    public void OnSound_Click(int index)
+    {
         audioSource.clip = audioClips[index];
         audioSource.Play();
     }
 
     public void PlaySound(int index)
     {
-        audioSource.clip = audioClips[index];
-        audioSource.Play();
+        if (!audioSource.isPlaying)
+        {
+            Debug.Log("OlaySounds");
+            audioSource.clip = audioClips[index];
+            audioSource.Play();
+        }
+    }
+
+    /// <summary>
+    /// Clear audio source
+    /// </summary>
+    public void Clear()
+    {
+        audioSource.clip = null;
+        audioSource.Stop();
     }
 }
