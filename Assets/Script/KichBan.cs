@@ -11,6 +11,15 @@ public class KichBan : MonoBehaviour
     
     public enum AnimationState { XinChao, Idle, DoChieuCao, DoCanNang, DoNhietDo, DoSPO2, DoNhipTim, DoHuyetAp,NoiChuyen, HoanThanh }
 
+    [Header("EventHandler")]
+    [SerializeField] private DefaultObserverEventHandler DefaultObserverEventHandler;
+
+    [Header("Startup")]
+    private bool startHelloFirst = false;
+
+    [Header("Debugging")]
+
+    [SerializeField] private bool firstStart = false;
     public AnimatorController animatorController;
     public SoundManager soundManager;
     public MqttLibs mqttLibs;
@@ -18,7 +27,7 @@ public class KichBan : MonoBehaviour
     private AnimationState prevState;
     public float timeSinceStartup;
     public float timerInterval = 0.1f;
-    // private bool isFirstScan = true;
+    private bool isFirstScan = true;
     public Button[] btnChange;
     public void Start()
     {
@@ -30,6 +39,15 @@ public class KichBan : MonoBehaviour
     public void Update()
     {
         timeSinceStartup += Time.deltaTime;
+
+        if (DefaultObserverEventHandler.GetTargetStatus().Status == Status.TRACKED)
+        {   
+            if (isFirstScan == true)
+            {
+                HandleMqttMessage("xinchao_va_can");
+                isFirstScan = false;
+            }
+        }
 
         if (timeSinceStartup >= timerInterval)
         {
