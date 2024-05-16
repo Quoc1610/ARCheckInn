@@ -54,48 +54,49 @@ public class KichBan : MonoBehaviour
     }
     public void On_ChangeStateClick(int index){
         if(index==0){
-            HandleMqttMessage("connguoi");
+            HandleMqttMessage("xinchao_va_can");
         }
         if(index==1){
-            HandleMqttMessage("can");
+            HandleMqttMessage("do_chieu_cao");
         }
         if(index==2){
-            HandleMqttMessage("cao");
+            HandleMqttMessage("do_nhiet_do");
         }
         if(index==3){
-            HandleMqttMessage("hoanThanh");
+            HandleMqttMessage("spo2_va_nhip_tim");
+        }
+        if(index==4){
+            HandleMqttMessage("do_huyet_ap");
+        }
+        if(index==5){
+            HandleMqttMessage("hoan_thanh");
         }
     }
     public void HandleMqttMessage(string message)
     {
         switch (message.ToLower())
         {
-            case "connguoi":
+            case "xinchao_va_can":
                 StartXinChao();
                 break;
-            case "cao":
+            case "do_chieu_cao":
                 StartDoChieuCao();
                 break;
-            case "can":
-                StartDoCanNang();
-                break;
-            case "nhietdo":
+            case "do_nhiet_do":
                 StartDoNhietDo();
                 break;
-            case "spo2":
-                StartDoSPO2();
+            case "spo2_va_nhip_tim":
+                StartDoSPO2vaNhipTim();
                 break;
-            case "nhiptim":
-                StartDoNhipTim();
-                break;
-            case "ecg":
+            case "do_huyet_ap":
                 StartDoHuyetAp();
                 break;
-            case "hoanthanh":
+            case "hoan_thanh":
                 StartHoanThanh();
                 break;
             default:
                 // Handle unexpected messages (optional)
+                Debug.Log("ERROR!");
                 break;
         }
     }
@@ -147,6 +148,12 @@ public class KichBan : MonoBehaviour
         SetTimer(1);
     }
 
+    private void StartDoSPO2vaNhipTim()
+    {
+        currentState = AnimationState.DoSPO2;
+        SetTimer(1);
+    }
+
     private void SetTimer(int duration)
     {
         timerInterval = duration * 0.1f; // Convert seconds to timer ticks
@@ -173,29 +180,30 @@ public class KichBan : MonoBehaviour
                 animatorController.TriggerAnim("XinChao");
                 prevState=currentState;
                 soundManager.PlaySound(0);
-                currentState = AnimationState.NoiChuyen;
+                // currentState = AnimationState.NoiChuyen;
+                currentState = AnimationState.DoCanNang;
                 break;
             case AnimationState.DoChieuCao:
                 animatorController.TriggerAnim("DoChieuCao"); // Assuming trigger name is "DoChieuCao"
-                soundManager.PlaySound(2);
-                prevState=currentState;
-                currentState = AnimationState.NoiChuyen;
-                break;
-            case AnimationState.DoCanNang:
-                animatorController.TriggerAnim("DoCanNang"); // Assuming trigger name is "DoCanNang"
                 soundManager.PlaySound(1);
                 prevState=currentState;
                 currentState = AnimationState.NoiChuyen;
                 break;
+            case AnimationState.DoCanNang:
+                // animatorController.TriggerAnim("DoCanNang"); // Assuming trigger name is "DoCanNang"
+                // soundManager.PlaySound(1);
+                prevState=currentState;
+                currentState = AnimationState.NoiChuyen;
+                break;
             case AnimationState.DoNhietDo:
-                animatorController.TriggerAnim("DoNhietDo"); // Assuming trigger name is "DoNhietDo"
-                soundManager.PlaySound(3);
+                animatorController.TriggerAnim("DoChieuCao"); // Assuming trigger name is "DoNhietDo"
+                soundManager.PlaySound(2);
                 prevState=currentState;
                 currentState = AnimationState.NoiChuyen;
                 break;
             case AnimationState.DoSPO2:
-                animatorController.TriggerAnim("DoSPO2"); // Assuming trigger name is "DoSPO2"
-                soundManager.PlaySound(4);
+                animatorController.TriggerAnim("DoChieuCao"); // Assuming trigger name is "DoSPO2"
+                soundManager.PlaySound(3);
                 prevState=currentState;
                 currentState = AnimationState.NoiChuyen;
                 break;
@@ -206,14 +214,14 @@ public class KichBan : MonoBehaviour
                 currentState = AnimationState.NoiChuyen;
                 break;
             case AnimationState.DoHuyetAp:
-                animatorController.TriggerAnim("DoHuyetAp"); // Assuming trigger name is "DoHuyetAp"
-                soundManager.PlaySound(6);
-
+                animatorController.TriggerAnim("DoChieuCao"); // Assuming trigger name is "DoHuyetAp"
+                soundManager.PlaySound(4);
+                prevState=currentState;
                 currentState = AnimationState.NoiChuyen;
                 break;
             case AnimationState.HoanThanh:
-                animatorController.TriggerAnim("XinChao");
-                soundManager.PlaySound(3);
+                // animatorController.TriggerAnim("XinChao");
+                soundManager.PlaySound(5);
                 prevState = currentState;
                 currentState = AnimationState.NoiChuyen;
 
@@ -221,18 +229,29 @@ public class KichBan : MonoBehaviour
             case AnimationState.NoiChuyen:
                 animatorController.TriggerAnim("NoiChuyen"); // Assuming trigger name is "DoHuyetAp"
                 
-                if(prevState==AnimationState.XinChao){
+                // if(prevState==AnimationState.XinChao){
                     
-                    StartCoroutine(WaitForSecondIdle(8f));
+                //     StartCoroutine(WaitForSecondIdle(8f));
+                // }
+                if(prevState==AnimationState.DoNhietDo){
+                    StartCoroutine(WaitForSecondIdle(6f));
                 }
                 if(prevState==AnimationState.DoChieuCao){
-                    StartCoroutine(WaitForSecondIdle(10f));
+                    StartCoroutine(WaitForSecondIdle(5f));
                 }
-                if(prevState==AnimationState.DoCanNang){
+                if(prevState==AnimationState.DoSPO2){
+                    StartCoroutine(WaitForSecondIdle(5f));
+                }
+                if(prevState==AnimationState.DoHuyetAp){
                     StartCoroutine(WaitForSecondIdle(7f));
                 }
+                if(prevState==AnimationState.DoCanNang){
+                    // StartCoroutine(WaitForSecondIdle(7f));
+                    StartCoroutine(WaitForCan(3.5f));
+                }
                 if(prevState==AnimationState.HoanThanh){
-                    StartCoroutine(WaitForSecondIdle(8f)); 
+                    // StartCoroutine(WaitForSecondIdle(10f)); 
+                    StartCoroutine(WaitForHoanThanh(10f));
                 }
                 currentState = AnimationState.Idle;
                 break;            
@@ -243,6 +262,25 @@ public class KichBan : MonoBehaviour
         animatorController.BoolAnimTrue("NoiChuyen");
         yield return new WaitForSecondsRealtime(second);
         animatorController.BoolAnimFalse("NoiChuyen");
+        currentState=AnimationState.Idle;
+    }
+
+    IEnumerator WaitForCan(float second)
+    {
+        yield return new WaitForSecondsRealtime(second);
+        animatorController.TriggerAnim("DoCanNang");
+        animatorController.BoolAnimTrue("NoiChuyen");
+        yield return new WaitForSecondsRealtime(second + 2f);
+        animatorController.BoolAnimFalse("NoiChuyen");
+        currentState=AnimationState.Idle;
+    }
+
+    IEnumerator WaitForHoanThanh(float second)
+    {
+        animatorController.BoolAnimTrue("NoiChuyen");
+        yield return new WaitForSecondsRealtime(second);
+        animatorController.BoolAnimFalse("NoiChuyen");
+        animatorController.TriggerAnim("XinChao");
         currentState=AnimationState.Idle;
     }
 }
