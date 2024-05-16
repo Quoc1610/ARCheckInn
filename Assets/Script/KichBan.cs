@@ -13,7 +13,7 @@ public class KichBan : MonoBehaviour
     public AnimatorController animatorController;
     public SoundManager soundManager;
     public MqttLibs mqttLibs;
-    public AnimationState currentState;
+    [SerializeField] private AnimationState currentState;
     public float timeSinceStartup;
     public float timerInterval = 0.1f;
     // private bool isFirstScan = true;
@@ -44,7 +44,7 @@ public class KichBan : MonoBehaviour
         //     }
         // }
 
-        if (currentState == AnimationState.Idle && mqttLibs.objText.text != "")
+        if (mqttLibs.objText.text != "")
         {
             HandleMqttMessage(mqttLibs.objText.text);
         }
@@ -148,30 +148,37 @@ public class KichBan : MonoBehaviour
             case AnimationState.XinChao:
                 animatorController.TriggerAnim("XinChao"); // Assuming trigger name is "XinChao"
                 soundManager.PlaySound(1);
+                currentState = AnimationState.Idle;
                 break;
             case AnimationState.DoChieuCao:
                 animatorController.TriggerAnim("DoChieuCao"); // Assuming trigger name is "DoChieuCao"
                 soundManager.PlaySound(2);
+                currentState = AnimationState.Idle;
                 break;
             case AnimationState.DoCanNang:
                 animatorController.TriggerAnim("DoCanNang"); // Assuming trigger name is "DoCanNang"
                 soundManager.PlaySound(2);
+                currentState = AnimationState.Idle;
                 break;
             case AnimationState.DoNhietDo:
                 animatorController.TriggerAnim("DoNhietDo"); // Assuming trigger name is "DoNhietDo"
                 soundManager.PlaySound(2);
+                currentState = AnimationState.Idle;
                 break;
             case AnimationState.DoSPO2:
                 animatorController.TriggerAnim("DoSPO2"); // Assuming trigger name is "DoSPO2"
                 soundManager.PlaySound(2);
+                currentState = AnimationState.Idle;
                 break;
             case AnimationState.DoNhipTim:
                 animatorController.TriggerAnim("DoNhipTim"); // Assuming trigger name is "DoNhipTim"
                 soundManager.PlaySound(2);
+                currentState = AnimationState.Idle;
                 break;
             case AnimationState.DoHuyetAp:
                 animatorController.TriggerAnim("DoHuyetAp"); // Assuming trigger name is "DoHuyetAp"
                 soundManager.PlaySound(2);
+                currentState = AnimationState.Idle;
                 break;
         }
     }
