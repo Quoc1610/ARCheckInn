@@ -65,20 +65,25 @@ public class KichBan : MonoBehaviour
         //     }
         // }
 
-        // if (mqttLibs.objText.text != "")
-        // {
-        //     HandleMqttMessage(mqttLibs.objText.text);
-        // }
+        if (mqttLibs.objText.text != "")
+        {
+            HandleMqttMessage(mqttLibs.objText.text);
+            mqttLibs.objText.text = "";
+        }
     }
     public void On_ChangeStateClick(int index){
+       
         if(index==0){
             HandleMqttMessage("xinchao_va_can");
+            
         }
         if(index==1){
             HandleMqttMessage("do_chieu_cao");
         }
         if(index==2){
+            
             HandleMqttMessage("do_nhiet_do");
+            
         }
         if(index==3){
             HandleMqttMessage("spo2_va_nhip_tim");
@@ -92,6 +97,7 @@ public class KichBan : MonoBehaviour
     }
     public void HandleMqttMessage(string message)
     {
+        Debug.Log("Print the recieved Message "+message);
         switch (message.ToLower())
         {
             case "xinchao_va_can":
