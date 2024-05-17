@@ -34,8 +34,9 @@ public class KichBan : MonoBehaviour
         // animator = GetComponent<Animator>(); // Assuming Animator is on this GameObject
         currentState = AnimationState.Idle;
         prevState=AnimationState.Idle;
+        mqttLibs.objText.text = "";
     }
-
+    
     public void Update()
     {
         timeSinceStartup += Time.deltaTime;
@@ -65,25 +66,23 @@ public class KichBan : MonoBehaviour
         //     }
         // }
 
-        if (mqttLibs.objText.text != "")
+        if (mqttLibs.objText.text !="" && !isFirstScan)
         {
+
             HandleMqttMessage(mqttLibs.objText.text);
             mqttLibs.objText.text = "";
+            mqttLibs.ResetPublish();
         }
     }
     public void On_ChangeStateClick(int index){
-       
         if(index==0){
             HandleMqttMessage("xinchao_va_can");
-            
         }
         if(index==1){
             HandleMqttMessage("do_chieu_cao");
         }
         if(index==2){
-            
             HandleMqttMessage("do_nhiet_do");
-            
         }
         if(index==3){
             HandleMqttMessage("spo2_va_nhip_tim");
@@ -97,7 +96,7 @@ public class KichBan : MonoBehaviour
     }
     public void HandleMqttMessage(string message)
     {
-        Debug.Log("Print the recieved Message "+message);
+
         switch (message.ToLower())
         {
             case "xinchao_va_can":
@@ -119,8 +118,6 @@ public class KichBan : MonoBehaviour
                 StartHoanThanh();
                 break;
             default:
-                // Handle unexpected messages (optional)
-                Debug.Log("ERROR!");
                 break;
         }
     }

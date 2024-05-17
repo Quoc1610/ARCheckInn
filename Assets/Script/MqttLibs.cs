@@ -33,6 +33,13 @@ public class MqttLibs : M2MqttUnityClient
         Debug.Log("Test message published");
         AddUiMessage("Test message published.");
     }
+    public void ResetPublish()
+    {
+        client.Publish("/innovation/valvecontroller/eHealthAR", System.Text.Encoding.UTF8.GetBytes("idle"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+
+        Debug.Log("Reset publish");
+    }
+
 
     public void SetBrokerAddress(string brokerAddress)
     {
