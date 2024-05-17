@@ -1091,15 +1091,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4.8
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1715,7 +1715,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 95ac8559592816a4aa9cfb366aa1d87c, type: 3}
   - {fileID: 8300000, guid: 52e7848ed610a01479444c176f832119, type: 3}
   - {fileID: 8300000, guid: a75867f91ecd37f4c9a62b507e8529cf, type: 3}
-  - {fileID: 8300000, guid: b5bffe893908ab54cadb83d1928b7427, type: 3}
+  - {fileID: 8300000, guid: 5a8d5bc07aaa3814dbae8723d6e02923, type: 3}
   button: []
 --- !u!114 &1020249459
 MonoBehaviour:
