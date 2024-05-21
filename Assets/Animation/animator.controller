@@ -412,28 +412,28 @@ AnimatorStateMachine:
     m_Position: {x: 30, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6989561843917803947}
-    m_Position: {x: -260, y: 370, z: 0}
+    m_Position: {x: -200, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 166165324728310587}
-    m_Position: {x: 450, y: 130, z: 0}
+    m_Position: {x: 290, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9174044624986313776}
-    m_Position: {x: 0, y: 310, z: 0}
+    m_Position: {x: -70, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3368540642716202216}
-    m_Position: {x: 210, y: 310, z: 0}
+    m_Position: {x: 130, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1303085000377489870}
-    m_Position: {x: 420, y: 310, z: 0}
+    m_Position: {x: 290, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7085277755370303520}
-    m_Position: {x: -450, y: 300, z: 0}
+    m_Position: {x: -200, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7743403387102670446}
-    m_Position: {x: 630, y: 310, z: 0}
+    m_Position: {x: 290, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7149846602326286981}
-    m_Position: {x: -650, y: 180, z: 0}
+    m_Position: {x: -200, y: 130, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -521,7 +521,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BasicMotions@Talk01
+  m_Name: Talk
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -535,7 +535,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -4131146202891655349, guid: c972fd1e43435c5499c4c94edaec7d4d, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: c3fa17f10e4017847a66099577ed6c7d, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -780,8 +780,8 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_TransitionOffset: 0.0026328764
+  m_ExitTime: 2.2099694e-10
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
