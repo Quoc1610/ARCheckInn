@@ -66,13 +66,13 @@ public class KichBan : MonoBehaviour
         //     }
         // }
 
-        if (mqttLibs.objText.text !="" && !isFirstScan)
-        {
+        // if (mqttLibs.objText.text !="" && !isFirstScan)
+        // {
 
-            HandleMqttMessage(mqttLibs.objText.text);
-            mqttLibs.objText.text = "";
-            mqttLibs.ResetPublish();
-        }
+        //     HandleMqttMessage(mqttLibs.objText.text);
+        //     mqttLibs.objText.text = "";
+        //     mqttLibs.ResetPublish();
+        // }
     }
     public void On_ChangeStateClick(int index){
         if(index==0){
