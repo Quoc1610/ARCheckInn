@@ -203,6 +203,7 @@ public class KichBan : MonoBehaviour
                 soundManager.PlaySound(0);
                 // currentState = AnimationState.NoiChuyen;
                 currentState = AnimationState.DoCanNang;
+                mqttLibs.Pub_WAIT();
                 break;
             case AnimationState.DoChieuCao:
                 animatorController.TriggerAnim("DoChieuCao"); // Assuming trigger name is "DoChieuCao"

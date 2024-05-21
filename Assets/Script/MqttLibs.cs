@@ -33,6 +33,88 @@ public class MqttLibs : M2MqttUnityClient
         Debug.Log("Test message published");
         AddUiMessage("Test message published.");
     }
+
+    public void Pub_WAIT()
+    {
+        client.Publish("/innovation/valvecontroller/eHealthAR", System.Text.Encoding.UTF8.GetBytes("WAIT: 0968910017"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+
+        Debug.Log("WAIT message published");
+        AddUiMessage("WAIT message published.");
+    }
+
+    // protected override void DecodeMessageKiosk(string topic, byte[] message)
+    // {
+    //     string msg = System.Text.Encoding.UTF8.GetString(message);
+    //     Debug.Log("***Received: " + msg);
+    //     objText.SetText(msg);
+    //     StoreMessage(msg);
+
+    //     // Split message based on colon (":")
+    //     string[] parts = msg.Split(':');
+    //     if (parts.Length == 2)
+    //     {
+    //         string id = parts[0];
+    //         string sensorData = parts[1];
+
+    //         // Split sensor data by comma (",")
+    //         string[] sensorValues = sensorData.Split(',');
+    //         float[] parsedValues = new float[sensorValues.Length];
+
+    //         // Parse each sensor value to float
+    //         if (sensorValues.Length == 6)
+    //         {
+    //             for (int i = 0; i < sensorValues.Length; i++)
+    //             {
+    //                 parsedValues[i] = float.Parse(sensorValues[i]);
+    //             }
+
+    //             // Create a JSON object
+    //             var jsonObject = new Dictionary<string, object>()
+    //             {
+    //                 { "phone_number", id },
+    //                 { "weight", parsedValues[0] },
+    //                 { "height", parsedValues[1] },
+    //                 { "temp", parsedValues[2] },
+    //                 { "pulse", parsedValues[3] },
+    //                 { "breath", parsedValues[4] },
+    //                 { "blood", parsedValues[5] },
+    //             };
+
+    //             // Send HTTP POST request with JSON data (assuming you have a library for HTTP requests)
+    //             StartCoroutine(SendHttpPostRequest(jsonObject, "https://lhmqk.pythonanywhere.com/records/update"));
+    //         }
+    //         else
+    //         {
+    //             Debug.LogError("Invalid number of sensor values. Expected 6, received: " + sensorValues.Length);
+    //         }
+    //     }
+    // }
+
+    IEnumerator SendHttpPostRequest(Dictionary<string, object> jsonObject, string url)
+    {
+        string jsonData = JsonUtility.ToJson(jsonObject);
+
+        var byteArray = Encoding.UTF8.GetBytes(jsonData);
+
+        using (var www = new WWW(url, byteArray, new Dictionary<string, string>() { { "Content-Type", "application/json" } }))
+        {
+            yield return www;
+
+            if (www.isDone)
+            {
+                if (www.isSuccess)
+                {
+                    Debug.Log("HTTP POST successful: " + www.text);
+                }
+                else
+                {
+                    Debug.LogError("HTTP POST failed: " + www.error);
+                }
+            }
+        }
+    }
+
+
     public void ResetPublish()
     {
         client.Publish("/innovation/valvecontroller/eHealthAR", System.Text.Encoding.UTF8.GetBytes("idle"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
@@ -190,6 +272,46 @@ public class MqttLibs : M2MqttUnityClient
         Debug.Log("***Received: " + msg);
         objText.SetText(msg);
         StoreMessage(msg);
+
+        // Split message based on colon (":")
+        string[] parts = msg.Split(':');
+        if (parts.Length == 2)
+        {
+            string id = parts[0];
+            string sensorData = parts[1];
+
+            // Split sensor data by comma (",")
+            string[] sensorValues = sensorData.Split(',');
+            float[] parsedValues = new float[sensorValues.Length];
+
+            // Parse each sensor value to float
+            if (sensorValues.Length == 6)
+            {
+                for (int i = 0; i < sensorValues.Length; i++)
+                {
+                    parsedValues[i] = float.Parse(sensorValues[i]);
+                }
+
+                // Create a JSON object
+                var jsonObject = new Dictionary<string, object>()
+                {
+                    { "phone_number", id },
+                    { "record_weight", parsedValues[0] },
+                    { "record_height", parsedValues[1] },
+                    { "record_temp", parsedValues[2] },
+                    { "record_pulse", parsedValues[3] },
+                    { "record_breath", parsedValues[4] },
+                    { "record_blood", parsedValues[5] },
+                };
+
+                // Send HTTP POST request with JSON data (assuming you have a library for HTTP requests)
+                StartCoroutine(SendHttpPostRequest(jsonObject, "https://lhmqk.pythonanywhere.com/records/update_kiosk"));
+            }
+            else
+            {
+                Debug.LogError("Invalid number of sensor values. Expected 6, received: " + sensorValues.Length);
+            }
+        }
     }
 
     private void StoreMessage(string eventMsg)
