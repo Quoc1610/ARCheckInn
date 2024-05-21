@@ -47,6 +47,7 @@ public class KichBan : MonoBehaviour
             {
                 HandleMqttMessage("xinchao_va_can");
                 isFirstScan = false;
+                mqttLibs.Pub_WAIT();
             }
         }
 
@@ -56,6 +57,7 @@ public class KichBan : MonoBehaviour
             fsmAction();
             timeSinceStartup -= timerInterval;
         }
+
 
         // if (goNurse.activeSelf)
         // {
@@ -71,7 +73,6 @@ public class KichBan : MonoBehaviour
 
             HandleMqttMessage(mqttLibs.objText.text);
             mqttLibs.objText.text = "";
-            mqttLibs.ResetPublish();
         }
     }
     public void On_ChangeStateClick(int index){
@@ -131,6 +132,7 @@ public class KichBan : MonoBehaviour
     {
         currentState = AnimationState.HoanThanh;
         SetTimer(1);
+        // mqttLibs.Pub_WAIT();
     }
 
     private void StartDoChieuCao()
@@ -203,7 +205,6 @@ public class KichBan : MonoBehaviour
                 soundManager.PlaySound(0);
                 // currentState = AnimationState.NoiChuyen;
                 currentState = AnimationState.DoCanNang;
-                mqttLibs.Pub_WAIT();
                 break;
             case AnimationState.DoChieuCao:
                 animatorController.TriggerAnim("DoChieuCao"); // Assuming trigger name is "DoChieuCao"
