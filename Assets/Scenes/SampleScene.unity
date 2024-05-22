@@ -625,11 +625,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336175363}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.48}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1912268362}
+  - {fileID: 1329127164}
   m_Father: {fileID: 1645368278}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1091,15 +1092,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4.8
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.8
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4.8
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1651,22 +1652,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goNurse: {fileID: 549033564}
+  goPosMove: {fileID: 1329127163}
   posHuyetAp: {x: 0, y: 0, z: 0}
   DefaultObserverEventHandler: {fileID: 336175365}
+  timerInterval: 0.1
   firstStart: 0
   animatorController: {fileID: 1020249455}
   soundManager: {fileID: 1020249458}
   mqttLibs: {fileID: 1020249457}
   currentState: 1
   timeSinceStartup: 0
-  timerInterval: 0.1
-  btnChange:
-  - {fileID: 1199636429}
-  - {fileID: 1160812712}
-  - {fileID: 2031621786}
-  - {fileID: 1276589769}
-  - {fileID: 1532204268}
-  - {fileID: 11536237}
   isMoveHuyetAp: 0
 --- !u!114 &1020249457
 MonoBehaviour:
@@ -2269,6 +2264,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276589767}
   m_CullTransparentMesh: 1
+--- !u!1 &1329127163
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1329127164}
+  m_Layer: 0
+  m_Name: PosMove
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1329127164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329127163}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.76, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 336175367}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1532204266
 GameObject:
   m_ObjectHideFlags: 0
