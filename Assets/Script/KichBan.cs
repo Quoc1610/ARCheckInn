@@ -8,7 +8,7 @@ using Vuforia;
 public class KichBan : MonoBehaviour
 {
     public GameObject goNurse;
-    
+    public Vector3 posHuyetAp;
     public enum AnimationState { XinChao, Idle, DoChieuCao, DoCanNang, DoNhietDo, DoSPO2, DoNhipTim, DoHuyetAp,NoiChuyen, HoanThanh }
 
     [Header("EventHandler")]
@@ -29,12 +29,15 @@ public class KichBan : MonoBehaviour
     public float timerInterval = 0.1f;
     private bool isFirstScan = true;
     public Button[] btnChange;
+    public bool isMoveHuyetAp;
     public void Start()
     {
         // animator = GetComponent<Animator>(); // Assuming Animator is on this GameObject
         currentState = AnimationState.Idle;
         prevState=AnimationState.Idle;
         mqttLibs.objText.text = "";
+        posHuyetAp = new Vector3(-3, -5, 5);
+        isMoveHuyetAp = false;
     }
     
     public void Update()
@@ -58,6 +61,12 @@ public class KichBan : MonoBehaviour
             timeSinceStartup -= timerInterval;
         }
 
+        if (isMoveHuyetAp)
+        {
+            goNurse.transform.position = Vector3.MoveTowards(goNurse.transform.position, posHuyetAp, 0.05f);
+            
+            if (goNurse.transform.position == posHuyetAp) isMoveHuyetAp = false;
+        }
 
         // if (goNurse.activeSelf)
         // {
@@ -223,6 +232,7 @@ public class KichBan : MonoBehaviour
                 soundManager.PlaySound(2);
                 prevState=currentState;
                 currentState = AnimationState.NoiChuyen;
+                
                 break;
             case AnimationState.DoSPO2:
                 animatorController.TriggerAnim("DoChieuCao"); // Assuming trigger name is "DoSPO2"
@@ -296,6 +306,7 @@ public class KichBan : MonoBehaviour
         yield return new WaitForSecondsRealtime(second + 2f);
         animatorController.BoolAnimFalse("NoiChuyen");
         currentState=AnimationState.Idle;
+        isMoveHuyetAp = true;
     }
 
     IEnumerator WaitForHoanThanh(float second)

@@ -1103,15 +1103,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1651,6 +1651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goNurse: {fileID: 549033564}
+  posHuyetAp: {x: 0, y: 0, z: 0}
   DefaultObserverEventHandler: {fileID: 336175365}
   firstStart: 0
   animatorController: {fileID: 1020249455}
@@ -1666,6 +1667,7 @@ MonoBehaviour:
   - {fileID: 1276589769}
   - {fileID: 1532204268}
   - {fileID: 11536237}
+  isMoveHuyetAp: 0
 --- !u!114 &1020249457
 MonoBehaviour:
   m_ObjectHideFlags: 0
