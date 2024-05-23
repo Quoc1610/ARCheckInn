@@ -22,9 +22,11 @@ public class KichBan : MonoBehaviour
     private Quaternion prevRotation;
     [Header("-------------------------Variables----------------------------")]
     [SerializeField] private bool firstStart = false;
+    [SerializeField] private bool isStartMoving= false;
     public AnimatorController animatorController;
     public SoundManager soundManager;
     public MqttLibs mqttLibs;
+    [SerializeField] private float speed = 0.01f;
     [SerializeField] private AnimationState currentState;
     private AnimationState prevState;
     public float timeSinceStartup;
@@ -32,14 +34,14 @@ public class KichBan : MonoBehaviour
     
 
     public bool isMoveHuyetAp;
-    public void Start()
+    public void Awake()
     {
         currentState = AnimationState.Idle;
         prevState=AnimationState.Idle;
         mqttLibs.objText.text = "";
         posHuyetAp = new Vector3(1, 0f, 0);
         isMoveHuyetAp = false;
-        prevRotation = goNurse.transform.rotation;
+    
     }
     
     public void Update()
@@ -53,6 +55,7 @@ public class KichBan : MonoBehaviour
                 HandleMqttMessage("xinchao_va_can");
                 isFirstScan = false;
                 mqttLibs.Pub_WAIT();
+                
             }
         }
 
@@ -65,6 +68,10 @@ public class KichBan : MonoBehaviour
 
         if (isMoveHuyetAp)
         {
+            if(isStartMoving==true){
+                prevRotation = goNurse.transform.rotation;
+                isStartMoving=false;
+            }
             animatorController.animator.SetBool("Walking", true);
             
             Debug.Log("Rotation now"+prevRotation.x+" "+prevRotation.y+" "+prevRotation.z);
@@ -76,7 +83,7 @@ public class KichBan : MonoBehaviour
             goNurse.transform.rotation = Quaternion.Slerp(goNurse.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
             goNurse.transform.position = Vector3.MoveTowards(goNurse.transform.position, goPosMove.transform.position, 
-                0.008f);
+                speed);
 
             if (Vector3.Distance(goNurse.transform.position, goPosMove.transform.position) < 0.1f)
             {
@@ -319,6 +326,7 @@ public class KichBan : MonoBehaviour
        
         yield return new WaitForSecondsRealtime(2f);
         isMoveHuyetAp = true;
+        isStartMoving=true;
         currentState=AnimationState.Idle;
     }
     IEnumerator WaitForCan(float second)
