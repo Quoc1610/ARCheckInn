@@ -76,7 +76,7 @@ public class KichBan : MonoBehaviour
             goNurse.transform.rotation = Quaternion.Slerp(goNurse.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
             goNurse.transform.position = Vector3.MoveTowards(goNurse.transform.position, goPosMove.transform.position, 
-                0.001f);
+                0.008f);
 
             if (Vector3.Distance(goNurse.transform.position, goPosMove.transform.position) < 0.1f)
             {
