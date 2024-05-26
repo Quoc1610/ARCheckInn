@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1092,27 +1092,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1877375030794835931, guid: 51773c5e29bf1cf4cb059a91b8c37b8e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1664,6 +1664,7 @@ MonoBehaviour:
   speed: 0.05
   currentState: 1
   timeSinceStartup: 0
+  goImgTarget: {fileID: 336175363}
   isMoveHuyetAp: 0
 --- !u!114 &1020249457
 MonoBehaviour:
@@ -2290,7 +2291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329127163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: -5, z: 8}
+  m_LocalPosition: {x: -2.5, y: -5, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2638,7 +2639,7 @@ Camera:
     height: 1
   near clip plane: 0.05
   far clip plane: 2000
-  field of view: 60
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: 1

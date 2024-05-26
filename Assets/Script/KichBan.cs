@@ -30,7 +30,7 @@ public class KichBan : MonoBehaviour
     [SerializeField] private AnimationState currentState;
     private AnimationState prevState;
     public float timeSinceStartup;
-    
+    public GameObject goImgTarget;   
     
 
     public bool isMoveHuyetAp;
@@ -47,7 +47,6 @@ public class KichBan : MonoBehaviour
     public void Update()
     {
         timeSinceStartup += Time.deltaTime;
-
         if (DefaultObserverEventHandler.GetTargetStatus().Status == Status.TRACKED)
         {   
             if (isFirstScan)
@@ -242,8 +241,6 @@ public class KichBan : MonoBehaviour
                 currentState = AnimationState.NoiChuyen;
                 break;
             case AnimationState.DoCanNang:
-                // animatorController.TriggerAnim("DoCanNang"); // Assuming trigger name is "DoCanNang"
-                // soundManager.PlaySound(1);
                 prevState=currentState;
                 currentState = AnimationState.NoiChuyen;
                 break;
@@ -281,11 +278,6 @@ public class KichBan : MonoBehaviour
                 break;
             case AnimationState.NoiChuyen:
                 animatorController.TriggerAnim("NoiChuyen"); // Assuming trigger name is "DoHuyetAp"
-                
-                // if(prevState==AnimationState.XinChao){
-                    
-                //     StartCoroutine(WaitForSecondIdle(8f));
-                // }
                 if(prevState==AnimationState.DoNhietDo){
                     StartCoroutine(WaitForSecondNhietDo(6f));
                     
@@ -323,7 +315,6 @@ public class KichBan : MonoBehaviour
         animatorController.BoolAnimTrue("NoiChuyen");
         yield return new WaitForSecondsRealtime(second);
         animatorController.BoolAnimFalse("NoiChuyen");
-       
         yield return new WaitForSecondsRealtime(2f);
         isMoveHuyetAp = true;
         isStartMoving=true;
@@ -333,9 +324,9 @@ public class KichBan : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(second);
         animatorController.TriggerAnim("DoCanNang");
-        animatorController.BoolAnimTrue("NoiChuyen");
-        yield return new WaitForSecondsRealtime(second + 2f);
-        animatorController.BoolAnimFalse("NoiChuyen");
+        animatorController.animator.SetBool("NoiChuyen",true);
+        yield return new WaitForSecondsRealtime(second + 4f);
+        animatorController.animator.SetBool("NoiChuyen",false);
         currentState=AnimationState.Idle;
         yield return new WaitForSecondsRealtime(2f);
         
